@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 
@@ -13,6 +13,9 @@ const initialFormValues = {
     special: ""
 
 }
+
+
+
 
 
 
@@ -48,6 +51,8 @@ const OrderForm = ({orders, setOrders}) => {
 
     const [form, setForm] = useState(initialFormValues)
     const history = useHistory()
+
+   
     
 
     const onChange = (e) => {
@@ -64,10 +69,13 @@ const OrderForm = ({orders, setOrders}) => {
 
     const SubmitHandler = (e) => {
         e.preventDefault()
+        
         setOrders([...orders, form])
         history.push("/mypizza")
+        
 
     }
+    
    
 
     
@@ -88,6 +96,9 @@ const OrderForm = ({orders, setOrders}) => {
             <select data-test-id="size"
                 name="size"
                 id="size-dropdown"
+                onChange={onChange}
+                value={form.size}
+                
           >
             <option value=''>- Select a Size -</option>
             <option value='small'> Small-12inches</option>

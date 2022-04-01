@@ -6,6 +6,8 @@ import "./App.css"
 const App = () => {
   const [orders, setOrders] = useState([]);
 
+
+ 
   return (
     <>
     <header>
@@ -24,7 +26,7 @@ const App = () => {
         </Route>
         <Route exact path="/pizza">
           <h2>order</h2>
-          <OrderForm  orders={orders} setOrders={setOrders}/>
+          <OrderForm orders={orders} setOrders={setOrders}/>
         </Route>
         <Route exact path="/mypizza">
           <h2>My Pizza!</h2>
@@ -33,7 +35,7 @@ const App = () => {
               <section key={`mypizza${index}`}>
                 <p>Name: {order.name}</p>
                 <p>Pizza size: {order.size}</p>
-                {/* <p>Toppings: {order.pepperoni && (<p>Pepperoni</p>)} {order.sausage && (<p>Sausage</p>)} {order.ham && (<p>ham</p>)} {order.jalapenos && (<p>Jalapenos</p>)}</p> */}
+                <p>Toppings: {order.pepperoni} {order.sausage} {order.ham} {order.jalapenos}</p>
                 <p>Special Instrucstions: {order.special}</p>
               </section>
             ))
