@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import * as yup from "yup";
 
 
 const initialFormValues = {
@@ -14,27 +15,66 @@ const initialFormValues = {
 }
 
 
-const OrderForm = (props) => {
+
+const OrderForm = ({orders, setOrders}) => {
+    const formSchema = yup.object().shape({
+        name: yup.string().trim().min(2, "name must be at least 2 characters"),
+        size: yup.string(),
+        pepperoni: yup.boolean(),
+        sausage: yup.boolean(),
+        ham: yup.boolean(),
+        jalapenos: yup.boolean(),
+        special: yup.string()
+    })
+    const [errors, setErrors] = useState({
+        name: "",
+        size: '',
+        pepperoni: false,
+        sausage: false,
+        ham: false,
+        jalapenos: false,
+        special: ""
+    })
+    const validateChange = (name, value) => {
+        yup.reach(formSchema, name)
+        .validate(value)
+        .then(() => {
+            setErrors({...errors, [name]: ""})
+        })
+        .catch((error) => {
+            setErrors({...errors, [name]: error.errors[0]})
+        })
+    }
+
     const [form, setForm] = useState(initialFormValues)
     const history = useHistory()
     
 
     const onChange = (e) => {
-      
+        const name = e.target.name
+        // const { checked, type } = e.target
+        
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+        
+        
+        validateChange(name, value)
+        setForm({...form, [name]: value})
 
-        setForm({...form, [e.target.name]: e.target.value})
     }
 
     const SubmitHandler = (e) => {
         e.preventDefault()
+        setOrders([...orders, form])
         history.push("/mypizza")
-    }
 
-    console.log(form);
+    }
+   
+
+    
 
     return (
        <form id="pizza-form" onSubmit={SubmitHandler}>
-           <label>Name:
+           <label><p>{errors.name}</p> Name: 
             <input 
                 type="text"
                 name="name"
@@ -63,7 +103,7 @@ const OrderForm = (props) => {
                     type="checkbox"
                     name="pepperoni"
                     onChange={onChange}
-                    // checked={form.pepperoni}
+                    checked={form.pepperoni}
                     />
             </label>
             <label>Sausage
@@ -71,7 +111,7 @@ const OrderForm = (props) => {
                     type="checkbox"
                     name="sausage"
                     onChange={onChange}
-                    // checked={form.sausage}
+                    checked={form.sausage}
                     />
             </label>
             <label>Ham
@@ -79,7 +119,7 @@ const OrderForm = (props) => {
                     type="checkbox"
                     name="ham"
                     onChange={onChange}
-                    // checked={form.ham}
+                    checked={form.ham}
                     />
             </label>
             <label>Jalapenos
@@ -87,7 +127,7 @@ const OrderForm = (props) => {
                     type="checkbox"
                     name="jalapenos"
                     onChange={onChange}
-                    // checked={form.jalapenos}
+                    checked={form.jalapenos}
                     />
             </label>
             <div>
