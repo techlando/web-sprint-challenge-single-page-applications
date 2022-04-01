@@ -75,7 +75,7 @@ const OrderForm = ({orders, setOrders}) => {
     return (
        <form id="pizza-form" onSubmit={SubmitHandler}>
            <label><p>{errors.name}</p> Name: 
-            <input 
+            <input data-test-id="name"
                 type="text"
                 name="name"
                 id="name-input"
@@ -85,7 +85,7 @@ const OrderForm = ({orders, setOrders}) => {
             </label>
             <div>
             <label>Pizza Size!
-            <select
+            <select data-test-id="size"
                 name="size"
                 id="size-dropdown"
           >
@@ -99,7 +99,7 @@ const OrderForm = ({orders, setOrders}) => {
         <div>
             <h2>Toppings</h2>
             <label>Pepperoni
-                <input 
+                <input data-test-id="pepperoni"
                     type="checkbox"
                     name="pepperoni"
                     onChange={onChange}
@@ -107,7 +107,7 @@ const OrderForm = ({orders, setOrders}) => {
                     />
             </label>
             <label>Sausage
-                <input 
+                <input data-test-id="sausage"
                     type="checkbox"
                     name="sausage"
                     onChange={onChange}
@@ -115,7 +115,7 @@ const OrderForm = ({orders, setOrders}) => {
                     />
             </label>
             <label>Ham
-                <input 
+                <input data-test-id="ham"
                     type="checkbox"
                     name="ham"
                     onChange={onChange}
@@ -123,7 +123,7 @@ const OrderForm = ({orders, setOrders}) => {
                     />
             </label>
             <label>Jalapenos
-                <input 
+                <input data-test-id="jalapenos"
                     type="checkbox"
                     name="jalapenos"
                     onChange={onChange}
@@ -132,7 +132,7 @@ const OrderForm = ({orders, setOrders}) => {
             </label>
             <div>
             <label>Special Intrustions:
-                <input
+                <input data-test-id="special"
                 type="text"
                 name="special"
                 id="special-text"
@@ -142,7 +142,7 @@ const OrderForm = ({orders, setOrders}) => {
             </label>
 
             </div>
-           <button id="order-button">Add to Order</button>
+           <button data-test-id="order-button" id="order-button">Add to Order</button>
 
                 
                 

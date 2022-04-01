@@ -13,8 +13,8 @@ const App = () => {
       <h1>Lambda Eats</h1>
       </div>
       <div>
-      <Link to="/">Home</Link>
-      <Link to="/pizza" id="order-pizza">Order</Link>
+      <Link data-test-id="home" to="/">Home</Link>
+      <Link data-test-id="order-pizza" to="/pizza" id="order-pizza">Order</Link>
       </div>
       </header>
       <Switch>
